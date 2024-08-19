@@ -4,6 +4,6 @@ class SweetsController < ApplicationController
   end
 
   def show
-    @sweet = Sweet.find_by(params[:id])
+    @sweet = Sweet.find(params[:id])
   end
 end
