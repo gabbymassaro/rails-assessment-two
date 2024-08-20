@@ -1,17 +1,17 @@
 class VendorsSweetsController < ApplicationController
-  # def create
-  #   @vendor = Vendor.find(params[:vendor_id])
-  #   @vendor_sweet = @vendor.vendor_sweets.build(vendor_sweet_params)
-  # end
+  def index
+    @vendors_sweets = VendorsSweet.all
+  end
 
-  # def show
-  #   @vendor = Vendor.find(params[:id])
-  #   @vendors_sweet = VendorsSweet.new
-  # end
+  def show
+    @vendors_sweet = VendorsSweet.find(params[:id])
+  end
 
-  # private
+  def new
+    @vendors_sweet = VendorsSweet.new
+  end
 
-  # def vendor_sweet_params
-  #   params.require(:vendor_sweet).permit(:sweet_id, comments_attributes: [:content])
-  # end
+  def create
+    vendors_sweet = VendorsSweet.create
+  end
 end

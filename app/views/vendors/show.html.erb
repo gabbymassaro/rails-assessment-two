@@ -7,9 +7,17 @@
   <% end %>
 </ul>
 
+<h2> Comments </h2>
+<ul>
+  <% @vendor.vendors_sweets.each do |vs| %>
+  <li><%= vs.comment %></li>
+  <% end %>
+</ul>
+
 <h2> Add Sweets and Comments </h2>
 <%= form_for(@vendor) do |f| %>
   <div class="field">
+    <%= f.label "Select Sweet"%><br>
     <%= f.collection_select :sweet_ids, Sweet.all, :id, :name %><br>
   </div>
 
@@ -17,7 +25,7 @@
 
   <div class="field">
   <%= f.fields_for :comments do |comment_form| %>
-  <%= comment_form.label :content %><br>
+  <%= comment_form.label :content, "New Comment" %><br>
   <%= comment_form.text_field :content %>
   <% end %>
   </div>
