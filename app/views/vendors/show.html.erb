@@ -2,15 +2,8 @@
 
 <h2>Sweets Sold:</h2>
 <ul>
-  <% @vendor.sweets.uniq.each do |sweet|  %>
-    <li><%= link_to sweet.name, sweet_path(sweet) %></li>
-  <% end %>
-</ul>
-
-<h2> Comments </h2>
-<ul>
-  <% @vendor.vendor_sweets.each do |vs| %>
-  <li><%= vs.comment %></li>
+  <% @vendor.vendor_sweets.each do |vs|  %>
+    <li><strong><%= vs.sweet.name %></strong>: "<%= vs.comment%>"</li>
   <% end %>
 </ul>
 
