@@ -1,11 +1,11 @@
 class VendorsController < ApplicationController
+  def show
+    @vendor = Vendor.find(params[:id])
+    @vendor_sweet = VendorSweet.new(vendor: @vendor)
+  end
 
   def index
     @vendors = Vendor.all
-  end
-
-  def show
-    @vendor = Vendor.find(params[:id])
   end
 
   def new

@@ -2,37 +2,25 @@
 
 <h2>Sweets Sold:</h2>
 <ul>
-  <% @vendor.sweets.each do |sweet| %>
+  <% @vendor.sweets.uniq.each do |sweet|  %>
     <li><%= link_to sweet.name, sweet_path(sweet.id) %></li>
   <% end %>
 </ul>
 
 <h2> Comments </h2>
 <ul>
-  <% @vendor.vendors_sweets.each do |vs| %>
+  <% @vendor.vendor_sweets.each do |vs| %>
   <li><%= vs.comment %></li>
   <% end %>
 </ul>
 
 <h2> Add Sweets and Comments </h2>
-<%= form_for(@vendor) do |f| %>
-  <div class="field">
+
+<%= form_for @vendor_sweet do |f| %>
+    <%= f.hidden_field :vendor_id %>
     <%= f.label "Select Sweet"%><br>
-    <%= f.collection_select :sweet_ids, Sweet.all, :id, :name %><br>
-  </div>
-
-  <br>
-
-  <div class="field">
-  <%= f.fields_for :comments do |comment_form| %>
-  <%= comment_form.label :content, "New Comment" %><br>
-  <%= comment_form.text_field :content %>
-  <% end %>
-  </div>
-
-  <br>
-
-  <div class="actions">
+    <%= f.collection_select :sweet_id, Sweet.all, :id, :name %><br><br>
+    <%= f.label "New Comment" %><br>
+    <%= f.text_field :comment%><br>
     <%= f.submit %>
-  </div>
 <% end %>
