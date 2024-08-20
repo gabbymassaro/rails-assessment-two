@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get '/vendors', to: "vendors#index", as: "vendors"
   get '/vendors/:id', to: "vendors#show", as: "vendor"
   get '/sweets/:id', to: "sweets#show", as: "sweet"
+  # post '/vendors/:vendor_id/vendor_sweets', to: "vendor_sweets#create", as: "vendor_sweets"
 end

@@ -6,3 +6,25 @@
     <li><%= link_to sweet.name, sweet_path(sweet.id) %></li>
   <% end %>
 </ul>
+
+<h2> Add Sweets and Comments </h2>
+<%= form_for(@vendor) do |f| %>
+  <div class="field">
+    <%= f.collection_select :sweet_ids, Sweet.all, :id, :name %><br>
+  </div>
+
+  <br>
+
+  <div class="field">
+  <%= f.fields_for :comments do |comment_form| %>
+  <%= comment_form.label :content %><br>
+  <%= comment_form.text_field :content %>
+  <% end %>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

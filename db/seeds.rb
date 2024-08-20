@@ -1,34 +1,49 @@
 # db/seeds.rb
 VendorsSweet.destroy_all
+Comment.destroy_all
 Sweet.destroy_all
 Vendor.destroy_all
 
 # Seed Sweets
 puts "Seeding Sweets...🌱"
-chocolate = Sweet.create!(name: "Chocolate")
-candy_cane = Sweet.create!(name: "Candy Cane")
-cupcake = Sweet.create!(name: "Cupcake")
-macaron = Sweet.create!(name: "Macaron")
-donut = Sweet.create!(name: "Donut")
+sweets = Sweet.create!([
+  { name: "Chocolate Cake" },
+  { name: "Lemon Tart" },
+  { name: "Candy Cane" },
+  { name: "Vanilla Ice Cream" },
+  { name: "Strawberry Cheesecake" }
+])
 
 # Seed Vendors
 puts "Seeding Vendors...🌱"
-sweet_shop = Vendor.create!(name: "Sweet Shop")
-bakery_bites = Vendor.create!(name: "Bakery Bites")
-sugar_rush = Vendor.create!(name: "Sugar Rush")
-treats_galore = Vendor.create!(name: "Treats Galore")
-delicious_delights = Vendor.create!(name: "Delicious Delights")
+vendors = Vendor.create!([
+  { name: "Sweet Treats" },
+  { name: "Candy Land" },
+  { name: "Dessert Delights" },
+  { name: "Sugar Rush" }
+])
 
 # Seed VendorSweets
 puts "Seeding VendorSweets...🌱"
-VendorsSweet.create!(vendor: sweet_shop, sweet: chocolate)
-VendorsSweet.create!(vendor: sweet_shop, sweet: candy_cane)
-VendorsSweet.create!(vendor: bakery_bites, sweet: cupcake)
-VendorsSweet.create!(vendor: bakery_bites, sweet: macaron)
-VendorsSweet.create!(vendor: sugar_rush, sweet: donut)
-VendorsSweet.create!(vendor: treats_galore, sweet: chocolate)
-VendorsSweet.create!(vendor: treats_galore, sweet: donut)
-VendorsSweet.create!(vendor: delicious_delights, sweet: macaron)
-VendorsSweet.create!(vendor: delicious_delights, sweet: candy_cane)
+vendors_sweets = [
+  { vendor_id: vendors[0].id, sweet_id: sweets[0].id }, # Sweet Treats - Chocolate Cake
+  { vendor_id: vendors[0].id, sweet_id: sweets[1].id }, # Sweet Treats - Lemon Tart
+  { vendor_id: vendors[1].id, sweet_id: sweets[2].id }, # Candy Land - Candy Cane
+  { vendor_id: vendors[2].id, sweet_id: sweets[3].id }, # Dessert Delights - Vanilla Ice Cream
+  { vendor_id: vendors[3].id, sweet_id: sweets[4].id }, # Sugar Rush - Strawberry Cheesecake
+  { vendor_id: vendors[1].id, sweet_id: sweets[3].id }, # Candy Land - Vanilla Ice Cream
+  { vendor_id: vendors[2].id, sweet_id: sweets[4].id }  # Dessert Delights - Strawberry Cheesecake
+]
+
+VendorsSweet.create!(vendors_sweets)
+
+# Seed Comments
+puts "Seeding Comments...🌱"
+comments = Comment.create!([
+  { content: "Absolutely delicious!", vendor_id: vendors[0].id, sweet_id: sweets[0].id },
+  { content: "Too sweet for my taste.", vendor_id: vendors[1].id, sweet_id: sweets[2].id },
+  { content: "Perfect for summer!", vendor_id: vendors[2].id, sweet_id: sweets[3].id },
+  { content: "Will definitely order again!", vendor_id: vendors[3].id, sweet_id: sweets[4].id }
+])
 
 puts "Seed data successfully created!"
